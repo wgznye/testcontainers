@@ -46,18 +46,17 @@ brew install --cask docker
 ```
     //创建rabbitmq容器
    RabbitMQContainer container = new RabbitMQContainer("rabbitmq:3.7.25-management-alpine")
-   //创建队列
-   container.withQueue("queueOne");
 
    //启动容器
    container.start();
-   //断言队列是否存在
-   assertThat(container.execInContainer("rabbitmqctl", "list_queues", "name", "arguments").getStdout())
-                .containsPattern("queue-one");
 ```
 5. 创建队列
 ```
-
+    //创建队列
+   container.withQueue("queueOne");
+     //断言队列是否存在
+   assertThat(container.execInContainer("rabbitmqctl", "list_queues", "name", "arguments").getStdout())
+                .containsPattern("queue-one");
 ```
 ## Testcontainers 使用场景：
 1. 数据库集成测试：通过在测试中启动数据库容器，可以执行与数据库交互的集成测试，而无需在本地安装和配置数据库。
